@@ -1,27 +1,15 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from control_empleados.models import Empleado, Sector 
-from django.urls import reverse
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from control_empleados.models import Empleado, Sector
+from django.urls import reverse, reverse_lazy
 from control_empleados.forms import SectorFormulario
+
+
 
 # Create your views here.
 
-#EMPLEADOS
-def listar_empleados(request):
-    contexto = {
-        'empleados': Empleado.objects.all(),
-    }
-    http_response = render(
-        request=request,
-        template_name='control_empleados/listar_empleados.html',
-        context=contexto,
-    )
-    return http_response
-
-
-
-
-
+#CLASES BASADAS EN VISTAS
 
 #SECTORES
 def listar_sector(request):
@@ -107,3 +95,28 @@ def editar_sector(request, id):
        template_name='control_empleados/formulario_sector.html',
        context={'formulario': formulario},
    )
+
+
+#CLASES BASADAS EN CLASES
+#EMPLEADOS
+class EmpleadoListView(ListView):
+    model = Empleado
+    template_name = 'control_empleados/listar_empleados.html'
+class EmpleadoCreateView(CreateView):
+    model = Empleado
+    fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
+    success_url = reverse_lazy ('listar_empleados.html')
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    success_url = reverse_lazy ('listar_empleados.html')
+class EmpleadoUpdateView(UpdateView):
+    model = Empleado
+    fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
+    success_url = reverse_lazy ('listar_empleados.html')
+class EmpleadoDeleteView(DeleteView):
+    model = Empleado
+    success_url = reverse_lazy ('listar_empleados.html')
+
+
+ 
+ 

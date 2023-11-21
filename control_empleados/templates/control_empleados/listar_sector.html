@@ -28,19 +28,21 @@
                 <th>Codigo</th> 
                 <th></th> 
                 <th></th> 
-            </tr>
+                <th></th> 
+             </tr>
             {% for sectores in sector%}
             <tr>
                 <td>{{sectores.id}} </td>
                 <td>{{sectores.nombre}} </td>
                 <td>{{sectores.codigo}} </td>
+                 
                 <td>
                     <a class='btn btn-link' href="{% url 'editar_sector' sectores.id %}">Editar</a>
                 </td>             
                 <td>
                     <form action="{% url 'eliminar_sector' sectores.id %}" method="post">
                       {% csrf_token %}
-                      <input type="submit" class='btn btn-link' value="eliminar"/>
+                      <input type="submit" class='btn btn-link' value="eliminar"/> 
                     </form>
                 </td>
             </tr>

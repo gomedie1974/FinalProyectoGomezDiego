@@ -8,15 +8,37 @@
 
 
 {% block contenido %}
-    <h1>Bienvenidos, les saluda</h1>
-
-    <h3>Empleados</h3>        
-    <ul>
-        {% for empleado in empleados%}
-        <li>
-            {{empleado.nombre}},{{empleado.apellido}}
-        </li>
+ 
+    <h3>Lista de empleados</h3>   
+    <a href="{% url 'crear-empleado' %}">Alta empleado</a> 
+    <br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th> 
+                <th>Apellido</th> 
+                <th>Nombre</th> 
+                <th></th> 
+                <th></th> 
+                <th></th> 
+            </tr>    
+        {% for empleado in object_list%}
+        <tr>
+            <td>{{empleado.id}}</td>
+            <td>{{empleado.apellido}}</td>
+            <td>{{empleado.nombre}}</td>
+            <td>
+                <a href="{% url 'ver_empleados' empleado.id %}">Ver  </a> 
+            </td>
+            <td>
+                <a href="{% url 'editar-empleado' empleado.id %}">Editar  </a> 
+            </td>
+            <td>
+                <a href="{% url 'eliminar-empleado' empleado.id %}"><i class='bi bi-trash'></i></a> 
+            </td>
+        </tr>
         {% endfor%}
-    </ul>
+        </tbody>
+    </table>
 
 {% endblock contenido %}
