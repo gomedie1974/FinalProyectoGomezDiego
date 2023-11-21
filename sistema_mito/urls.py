@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from sistema_mito.views import comienzo
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('comienzo/', comienzo)
 ]
