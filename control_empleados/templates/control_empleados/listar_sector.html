@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block titulo %} 
+
+<title>Sistemas Informáticos MITO - Inicio</title>
+
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <h1>Lista de sectores</h1>
+    <a href="{% url 'listar_sector' %}">Ver todos</a>
+    <a href="{% url 'crear_sector' %}">Crear sector</a>
+
+    <br><br>
+    <form action="{% url 'buscar_sector' %}" method="post">
+      {% csrf_token %}
+      <input type="text" name="busqueda">
+      <input type="submit" value="Buscar por codigo">
+    </form>
+    <br>
+ 
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th> 
+                <th>Nombre</th> 
+                <th>Codigo</th> 
+                <th></th> 
+                <th></th> 
+            </tr>
+            {% for sectores in sector%}
+            <tr>
+                <td>{{sectores.id}} </td>
+                <td>{{sectores.nombre}} </td>
+                <td>{{sectores.codigo}} </td>
+                <td>
+                    <a class='btn btn-link' href="{% url 'editar_sector' sectores.id %}">Editar</a>
+                </td>             
+                <td>
+                    <form action="{% url 'eliminar_sector' sectores.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" class='btn btn-link' value="eliminar"/>
+                    </form>
+                </td>
+            </tr>
+        {% endfor%}            
+        </tbody>            
+    </table>
+{% endblock contenido %}
