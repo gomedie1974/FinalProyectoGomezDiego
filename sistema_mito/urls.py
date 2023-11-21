@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('empleados/', include('control_empleados.urls')),
 
-    path('comienzo/', comienzo),
+    path('', comienzo, name='inicio'),
 ]
