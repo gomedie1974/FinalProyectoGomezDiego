@@ -27,8 +27,7 @@
                 <th>Nombre</th> 
                 <th>Apellido</th> 
                 <th>Dni</th> 
-                <th>mail</th> 
-                <th></th> 
+                 <th></th> 
                 <th></th> 
                 <th></th> 
              </tr>
@@ -38,16 +37,19 @@
                 <td>{{jefes.nombre}} </td>
                 <td>{{jefes.apellido}} </td>
                 <td>{{jefes.dni}} </td>
-                <td>{{jefes.email}} </td>
-                 
+                  
               <td>
+                    {% if user == jefes.creador %}
                     <a class='btn btn-link' href="{% url 'editar_jefe' jefes.id %}">Editar</a>
+                    {% endif %}
                 </td>             
                 <td>
+                  {% if user == jefes.creador %}
                     <form action="{% url 'eliminar_jefe' jefes.id %}" method="post">
                       {% csrf_token %}
                       <input type="submit" class='btn btn-link' value="eliminar"/> 
                     </form>
+                    {% endif %}
                 </td>
          </tr>
         {% endfor%}            

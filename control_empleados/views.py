@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin 
 from control_empleados.models import Empleado, Sector, Jefe
 from django.urls import reverse, reverse_lazy
 from control_empleados.forms import SectorFormulario, JefeFormulario
@@ -23,6 +25,7 @@ def listar_jefe(request):
     )
     return http_response
 
+@login_required
 def crear_jefe(request):
    if request.method == "POST":
        formulario = JefeFormulario(request.POST)
@@ -31,7 +34,8 @@ def crear_jefe(request):
            data = formulario.cleaned_data  # es un diccionario
            nombre = data["nombre"]
            apellido = data["apellido"]
-           jefe = Jefe(nombre=nombre, apellido=apellido)  # lo crean solo en RAM
+           dni = data["dni"]
+           jefe = Jefe(nombre=nombre, apellido=apellido,dni=dni, creador=request.user)  # lo crean solo en RAM
            jefe.save()  # Lo guardan en la Base de datos
 
            url_exitosa = reverse('listar_jefe')  
@@ -45,6 +49,7 @@ def crear_jefe(request):
    )
    return http_response
 
+@login_required
 def eliminar_jefe(request, id):
    jefe = Jefe.objects.get(id=id)
    if request.method == "POST":
@@ -52,6 +57,7 @@ def eliminar_jefe(request, id):
        url_exitosa = reverse('listar_jefe')
        return redirect(url_exitosa)
 
+@login_required
 def editar_jefe(request, id):
    jefe = Jefe.objects.get(id=id)
    if request.method == "POST":
@@ -160,6 +166,7 @@ def buscar_sector(request):
        )
        return http_response
    
+@login_required
 def eliminar_sector(request, id):
    sector = Sector.objects.get(id=id)
    if request.method == "POST":
@@ -167,6 +174,7 @@ def eliminar_sector(request, id):
        url_exitosa = reverse('listar_sector')
        return redirect(url_exitosa)
 
+@login_required
 def editar_sector(request, id):
    sector = Sector.objects.get(id=id)
    if request.method == "POST":
@@ -197,18 +205,23 @@ def editar_sector(request, id):
 class EmpleadoListView(ListView):
     model = Empleado
     template_name = 'control_empleados/listar_empleados.html'
-class EmpleadoCreateView(CreateView):
+class EmpleadoCreateView(LoginRequiredMixin, CreateView):
     model = Empleado
     fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
     success_url = reverse_lazy ('listar_empleados.html')
+
+    #def form_valid(self, form):
+     #   self.object = form.save(creador=self.request.user)
+      #  return super().form_valid(form)
+    
 class EmpleadoDetailView(DetailView):
     model = Empleado
     success_url = reverse_lazy ('listar_empleados.html')
-class EmpleadoUpdateView(UpdateView):
+class EmpleadoUpdateView(LoginRequiredMixin, UpdateView):
     model = Empleado
     fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
     success_url = reverse_lazy ('listar_empleados.html')
-class EmpleadoDeleteView(DeleteView):
+class EmpleadoDeleteView(LoginRequiredMixin, DeleteView):
     model = Empleado
     success_url = reverse_lazy ('listar_empleados.html')
 

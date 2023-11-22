@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block titulo %} 
-
 <title>Sistemas Informáticos MITO - Inicio</title>
-
 {% endblock titulo %}
 
 
 {% block contenido %}
-
-<h1>Bienvenidos </h1> <br>
 <h2>Sistemas Informáticos MITO</h2>
-            
+<br><br>
+{% if user.is_authenticated %}
+<h1>Bienvenido/a {{ user.last_name }}, {{ user.first_name }} </h1> 
+<div>
+<img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;"/>
+</div>
+<br>
+{% else %}
+<h1>Bienvenido/a Visitante</h1>
+{% endif %}            
 {% endblock contenido %}

@@ -18,10 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 
 from sistema_mito.views import comienzo
- 
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('empleados/', include('control_empleados.urls')),
+    path('perfiles/', include('perfiles.urls')),
 
     path('', comienzo, name='inicio'),
+
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+ 
