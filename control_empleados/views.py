@@ -1,15 +1,110 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from control_empleados.models import Empleado, Sector
+from control_empleados.models import Empleado, Sector, Jefe
 from django.urls import reverse, reverse_lazy
-from control_empleados.forms import SectorFormulario
+from control_empleados.forms import SectorFormulario, JefeFormulario
 
 
 
 # Create your views here.
 
 #CLASES BASADAS EN VISTAS
+
+#JEFES
+def listar_jefe(request):
+    contexto = {
+        'jefe': Jefe.objects.all(),
+    }
+    http_response = render(
+        request=request,
+        template_name='control_empleados/listar_jefe.html',
+        context=contexto,
+    )
+    return http_response
+
+def crear_jefe(request):
+   if request.method == "POST":
+       formulario = JefeFormulario(request.POST)
+
+       if formulario.is_valid():
+           data = formulario.cleaned_data  # es un diccionario
+           nombre = data["nombre"]
+           apellido = data["apellido"]
+           jefe = Jefe(nombre=nombre, apellido=apellido)  # lo crean solo en RAM
+           jefe.save()  # Lo guardan en la Base de datos
+
+           url_exitosa = reverse('listar_jefe')  
+           return redirect(url_exitosa)
+   else:  # GET
+       formulario = JefeFormulario()
+   http_response = render(
+        request=request,
+        template_name='control_empleados/formulario_jefe.html',
+        context={'formulario': formulario}
+   )
+   return http_response
+
+def eliminar_jefe(request, id):
+   jefe = Jefe.objects.get(id=id)
+   if request.method == "POST":
+       jefe.delete()
+       url_exitosa = reverse('listar_jefe')
+       return redirect(url_exitosa)
+
+def editar_jefe(request, id):
+   jefe = Jefe.objects.get(id=id)
+   if request.method == "POST":
+       formulario = JefeFormulario(request.POST)
+
+       if formulario.is_valid():
+           data = formulario.cleaned_data
+           jefe.nombre = data['nombre']
+           jefe.apellido = data['apellido']
+           jefe.dni = data['dni']
+           jefe.email = data['email']
+           jefe.fecha_nacimiento = data['fecha_nacimiento']
+           jefe.profesion = data['profesion']
+           jefe.save()
+           url_exitosa = reverse('listar_jefe')
+           return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'nombre': jefe.nombre,
+           'apellido': jefe.apellido,
+           'dni': jefe.dni,
+           'email': jefe.email,
+            'fecha_nacimiento' : jefe.fecha_nacimiento,
+            'profesion' : jefe.profesion,
+       }
+       formulario = JefeFormulario(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_empleados/formulario_jefe.html',
+       context={'formulario': formulario},
+   )
+
+def buscar_jefe(request):
+   if request.method == "POST":
+       data = request.POST
+       busqueda = data["busqueda"]
+       #forma de filtro simple
+       #sector = Sector.objects.filter(codigo__contains=busqueda)
+       #filtro avanzado
+       jefe = Jefe.objects.filter(
+           Q(nombre__contains=busqueda) | Q(apellido__contains=busqueda)
+       )
+       contexto = {
+           "jefe": jefe,
+       }
+       http_response = render(
+           request=request,
+           template_name='control_empleados/listar_jefe.html',
+           context=contexto,
+       )
+       return http_response
+
+
 
 #SECTORES
 def listar_sector(request):

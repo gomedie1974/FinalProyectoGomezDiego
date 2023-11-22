@@ -1,7 +1,7 @@
 from django.urls import path
 
 from control_empleados.views import (
-     crear_sector, listar_sector, buscar_sector, eliminar_sector, editar_sector,   EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView,  
+     crear_sector, listar_sector, buscar_sector, eliminar_sector, editar_sector,   EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView, listar_jefe, crear_jefe, eliminar_jefe, editar_jefe, buscar_jefe
 )
 
 urlpatterns = [
@@ -12,7 +12,15 @@ urlpatterns = [
       path('eliminar-sector/<int:id>/', eliminar_sector, name='eliminar_sector'),
       path('editar-sector/<int:id>/', editar_sector, name='editar_sector'),
  
+      #JEFES
+      path('jefe/', listar_jefe, name='listar_jefe'),
+      path('crear-jefe/', crear_jefe, name='crear_jefe'),
+      path('eliminar-jefe/<int:id>/', eliminar_jefe, name='eliminar_jefe'),
+      path('editar-jefe/<int:id>/', editar_jefe, name='editar_jefe'),
+      path('buscar-jefe/', buscar_jefe, name='buscar_jefe'),
 
+
+ 
       #EMPLEADOS  
       path('empleados/', EmpleadoListView.as_view(), name='listar_empleados'),
       path('empleados/<int:pk>/', EmpleadoDetailView.as_view(), name='ver_empleados'), 
