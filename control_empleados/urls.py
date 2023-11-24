@@ -1,10 +1,11 @@
 from django.urls import path
 
 from control_empleados.views import (
-     crear_sector, listar_sector, buscar_sector, eliminar_sector, editar_sector,   EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView, listar_jefe, crear_jefe, eliminar_jefe, editar_jefe, buscar_jefe
+     crear_sector, listar_sector, buscar_sector, eliminar_sector, editar_sector,   EmpleadoListView, EmpleadoCreateView, EmpleadoDetailView, EmpleadoUpdateView, EmpleadoDeleteView, listar_jefe, crear_jefe, eliminar_jefe, editar_jefe, buscar_jefe, acerca_de_mi
 )
 
 urlpatterns = [
+      path('acerca-de-mi/', acerca_de_mi, name='acerca_de_mi'),
       #SECTORES 
       path('sector/', listar_sector, name='listar_sector'),
       path('crear-sector/', crear_sector, name='crear_sector'),

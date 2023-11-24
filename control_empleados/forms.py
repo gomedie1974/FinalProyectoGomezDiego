@@ -11,5 +11,4 @@ class JefeFormulario(forms.Form):
    email = forms.CharField(required=True)
    fecha_nacimiento = forms.DateField(required=True)
    profesion = forms.CharField(max_length=128)
-   #bio = forms.CharField(max_length=128)
-
+ 

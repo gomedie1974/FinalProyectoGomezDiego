@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+ 
+{% block titulo %} 
+
+<title>Sistemas Informáticos MITO - Inicio</title>
+
+{% endblock titulo %}
+
+
+{% block contenido %}
+ 
+    <h3 >Acerca de MÍ</h3>   
+    
+    {% load static %}
+    <img class="img-fluid rounded-circle mb-3"; style="max-width: 150px;";  src="{% static 'assets/img/DiegoGomez.jpg' %}" alt="..." />
+    <h5>Bienvenido/a mi nombre es Diego! <hr> 
+
+    ¡Hola! quiero contarte que en esta página, te invito a conocerme y lo que me impulsa a seguir creciendo.
+    <br><br>
+    ¿Quién Soy?<br><br>
+    
+    Soy programador, apasionado por la tecnología.<br> Nací y crecí en Buenos Aires, donde resido actualmente.<br> Mi viaje hasta aquí ha estado lleno de desafíos y éxitos, y cada experiencia ha contribuido a mi desarrollo personal y profesional.
+    <br><br>
+     
+    En mi carrera, he desarrollado habilidades para enfrentar nuevos desafíos y contribuir al éxito en cualquier proyecto.
+    <br><br><br>
+    Gracias por visitar mi página. 
+    <br>
+ 
+
+    </h5>
+      
+{% endblock contenido %}

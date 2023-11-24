@@ -37,12 +37,13 @@
                 <td>{{jefes.nombre}} </td>
                 <td>{{jefes.apellido}} </td>
                 <td>{{jefes.dni}} </td>
-                  
+
+                       
               <td>
                     {% if user == jefes.creador %}
                     <a class='btn btn-link' href="{% url 'editar_jefe' jefes.id %}">Editar</a>
                     {% endif %}
-                </td>             
+                </td>                   
                 <td>
                   {% if user == jefes.creador %}
                     <form action="{% url 'eliminar_jefe' jefes.id %}" method="post">

@@ -7,6 +7,7 @@ from control_empleados.models import Empleado, Sector, Jefe
 from django.urls import reverse, reverse_lazy
 from control_empleados.forms import SectorFormulario, JefeFormulario
 
+ 
 
 
 # Create your views here.
@@ -14,6 +15,18 @@ from control_empleados.forms import SectorFormulario, JefeFormulario
 #CLASES BASADAS EN VISTAS
 
 #JEFES
+
+ 
+def acerca_de_mi(request):
+    contexto = {
+    }
+    http_response = render(
+        request=request,
+        template_name='control_empleados/acerca_de_mi.html',
+        context=contexto,
+    )
+    return http_response
+
 def listar_jefe(request):
     contexto = {
         'jefe': Jefe.objects.all(),
@@ -208,7 +221,7 @@ class EmpleadoListView(ListView):
 class EmpleadoCreateView(LoginRequiredMixin, CreateView):
     model = Empleado
     fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
-    success_url = reverse_lazy ('listar_empleados.html')
+    success_url = reverse_lazy ('listar_empleados')
 
     #def form_valid(self, form):
      #   self.object = form.save(creador=self.request.user)
@@ -216,14 +229,14 @@ class EmpleadoCreateView(LoginRequiredMixin, CreateView):
     
 class EmpleadoDetailView(DetailView):
     model = Empleado
-    success_url = reverse_lazy ('listar_empleados.html')
+    success_url = reverse_lazy ('listar_empleados ')
 class EmpleadoUpdateView(LoginRequiredMixin, UpdateView):
     model = Empleado
     fields = ('apellido', 'nombre', 'email', 'telefono', 'dni', 'fecha_nacimiento') 
-    success_url = reverse_lazy ('listar_empleados.html')
+    success_url = reverse_lazy ('listar_empleados')
 class EmpleadoDeleteView(LoginRequiredMixin, DeleteView):
     model = Empleado
-    success_url = reverse_lazy ('listar_empleados.html')
+    success_url = reverse_lazy ('listar_empleados')
 
 
  
