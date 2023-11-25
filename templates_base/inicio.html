@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block titulo %} 
 <title>Sistemas Informáticos MITO - Inicio</title>
@@ -12,12 +13,10 @@
 <div><h2>
     <img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;"/>
      Bienvenido/a {{ user.last_name }}, {{ user.first_name }} </h2> </div>
-<!-- <div>
-<img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;"/>
-</div>
- --><br>
+ <br>
 {% else %}
-<h2><img  src="../media/avatares/DG.png" />Bienvenido/a Visitante</h2>
+<h2><img  src="{% static 'assets/img/DG.png'%}" />Bienvenido/a Visitante</h2>
 
 {% endif %}            
 {% endblock contenido %}
+

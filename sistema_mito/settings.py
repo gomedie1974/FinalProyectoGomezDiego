@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'control_empleados',
     'perfiles',
- ]
+    'mensajeria',
+   ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

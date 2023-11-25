@@ -26,9 +26,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('empleados/', include('control_empleados.urls')),
     path('perfiles/', include('perfiles.urls')),
+    path('mensajeria/', include('mensajeria.urls')),
 
+ 
     path('', comienzo, name='inicio'),
 
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
- 
+  
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
