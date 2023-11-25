@@ -2,12 +2,13 @@
 # GOMEZ DIEGO 
 
 # La pagina cuenta de las siguientes secciones:
++ Inicio (pagina ppal.)
++ Clientes
++ Acerca de mi
 + Empleados
 + Jefe
 + Sector
 + Tambien esta la seccion del login con Avatar y la posibilidad de editar los mismos.
-+ Hay un link de Acerca de mi que te envia a una pagina sobre mi.
-
 
 # Super Usuario
 + diego
