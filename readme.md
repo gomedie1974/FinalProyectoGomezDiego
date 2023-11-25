@@ -3,6 +3,7 @@
 
 # La pagina cuenta de las siguientes secciones:
 + Inicio (pagina ppal.)
++ Chat
 + Clientes
 + Acerca de mi
 + Empleados

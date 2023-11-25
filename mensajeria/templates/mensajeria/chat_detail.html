@@ -8,10 +8,6 @@
 
 {% block contenido %}
 <h1>Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}</h1>
-<p>
-   <span style='color:red'> Enviado por:</span> {{ usuario_envia.get_full_name }} ({{ usuario_envia.username }})<br>
-    <span style='color:blue'> Recibido por:</span> {{ usuario_recibe.get_full_name }} ({{ usuario_recibe.username }})
-</p>
 
 <ul>
     {% for message in messages %}
