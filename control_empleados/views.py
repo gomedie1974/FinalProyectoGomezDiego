@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from django.db.models import Q
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from control_empleados.models import Empleado, Sector, Jefe
 from django.urls import reverse, reverse_lazy
 from control_empleados.forms import SectorFormulario, JefeFormulario
-
+  
  
 
 
@@ -16,7 +16,16 @@ from control_empleados.forms import SectorFormulario, JefeFormulario
 
 #JEFES
 
- 
+def clientes(request):
+    contexto = {
+    }
+    http_response = render(
+        request=request,
+        template_name='control_empleados/clientes.html',
+        context=contexto,
+    )
+    return http_response
+
 def acerca_de_mi(request):
     contexto = {
     }

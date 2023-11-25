@@ -6,15 +6,18 @@
 
 
 {% block contenido %}
-<h2>Sistemas Informáticos MITO</h2>
-<br><br>
+<h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">Sistemas Informáticos MITO</h1>
+<br> 
 {% if user.is_authenticated %}
-<h1>Bienvenido/a {{ user.last_name }}, {{ user.first_name }} </h1> 
-<div>
+<div><h2>
+    <img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;"/>
+     Bienvenido/a {{ user.last_name }}, {{ user.first_name }} </h2> </div>
+<!-- <div>
 <img src="{{ user.avatar.imagen.url }}" style="max-width: 100px;"/>
 </div>
-<br>
+ --><br>
 {% else %}
-<h1>Bienvenido/a Visitante</h1>
+<h2><img  src="../media/avatares/DG.png" />Bienvenido/a Visitante</h2>
+
 {% endif %}            
 {% endblock contenido %}
