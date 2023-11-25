@@ -7,12 +7,15 @@
 {% endblock titulo %}
 
 {% block contenido %}
+
 <h1>Chat entre {{ chat.usuario_1 }} y {{ chat.usuario_2 }}</h1>
 
+
 <ul>
-    {% for message in messages %}
-        <li>{{ message.fecha_creacion }} - {{ message.texto }} </li>
-    {% endfor %}
+     {% for message in messages %}
+    
+        <li>{{ message.fecha_creacion }} - {{ message.texto }}  </li>
+    {% endfor %}  
 </ul>
 <hr>
 {% endblock contenido %}
