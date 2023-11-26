@@ -21,3 +21,6 @@
 # Usuario normal
 + vduarte
 + vale2023 
+
+# En la carpeta sistema_mito 
++ Se encuentra el excel con el detalle de pruebas del sistema
